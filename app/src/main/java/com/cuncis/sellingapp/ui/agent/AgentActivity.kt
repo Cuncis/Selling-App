@@ -1,5 +1,6 @@
 package com.cuncis.sellingapp.ui.agent
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.model.Agent
 import com.cuncis.sellingapp.data.model.AgentResponse
+import com.cuncis.sellingapp.ui.agent.create.AgentCreateActivity
+import com.cuncis.sellingapp.util.Utils
 import com.cuncis.sellingapp.util.Utils.Companion.showToast
 
 import kotlinx.android.synthetic.main.activity_agent.*
@@ -33,6 +36,7 @@ class AgentActivity : AppCompatActivity(), AgentContract.View {
     override fun initActivity() {
         supportActionBar!!.title = "Agen"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        Utils.permissionMap(this, this)
     }
 
     override fun initListener() {
@@ -46,9 +50,8 @@ class AgentActivity : AppCompatActivity(), AgentContract.View {
             presenter.getAgent()
         }
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        fab.setOnClickListener {
+            startActivity(Intent(this, AgentCreateActivity::class.java))
         }
     }
 
