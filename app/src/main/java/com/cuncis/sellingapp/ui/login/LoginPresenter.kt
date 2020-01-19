@@ -17,8 +17,8 @@ class LoginPresenter(val view: LoginContract.View): LoginContract.Presenter {
 
     override fun doLogin(username: String, password: String) {
         view.onLoading(true)
-        val call = ApiService.theSellingApi.loginUser(username, password)
-        call.enqueue(object : Callback<PegawaiResponse> {
+        ApiService.theSellingApi.loginUser(username, password)
+            .enqueue(object : Callback<PegawaiResponse> {
             override fun onResponse(call: Call<PegawaiResponse>, response: Response<PegawaiResponse>) {
                 view.onLoading(false)
                 if (response.isSuccessful) {

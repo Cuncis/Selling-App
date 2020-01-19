@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Selling App</string>
+    <string name="title_activity_agent">AgentActivity</string>
 </resources>
