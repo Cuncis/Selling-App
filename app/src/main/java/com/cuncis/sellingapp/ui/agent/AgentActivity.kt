@@ -9,6 +9,7 @@ import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.model.Agent
 import com.cuncis.sellingapp.data.model.AgentResponse
 import com.cuncis.sellingapp.ui.agent.create.AgentCreateActivity
+import com.cuncis.sellingapp.ui.agent.update.AgentUpdateActivity
 import com.cuncis.sellingapp.util.Utils
 import com.cuncis.sellingapp.util.Utils.Companion.showToast
 
@@ -40,7 +41,12 @@ class AgentActivity : AppCompatActivity(), AgentContract.View {
     }
 
     override fun initListener() {
-        agentAdapter = AgentAdapter(this, arrayListOf())
+        agentAdapter = AgentAdapter(this, arrayListOf()) {
+            agent: Agent, i: Int, type: String ->
+            when (type) {
+                "update" -> startActivity(Intent(this, AgentUpdateActivity::class.java))
+            }
+        }
         rv_agent.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = agentAdapter

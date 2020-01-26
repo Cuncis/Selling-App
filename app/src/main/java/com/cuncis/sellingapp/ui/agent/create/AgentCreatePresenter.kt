@@ -46,13 +46,21 @@ class AgentCreatePresenter(val view: AgentCreateContract.View): AgentCreateContr
                     response: Response<AgentUpdateResponse>
                 ) {
                     view.onLoading(false)
+                    val msgResponse = response.body()
                     if (response.isSuccessful) {
-                        view.onResult(response.body()!!)
-                    } else if (response.code() == 400) {
-                        if (response.body()?.status == false) {
-                            showLog("Error1: " + response.body()!!.msg)
+//                        view.onResult(msgResponse!!.msgSukses!!.list[0])
+                        view.onResult("SUKSeS")
+                    } else {
+                        if (!response.body()!!.status!!) {
+                            when {
+                                msgResponse!!.msg == "nama_toko" -> view.onResult(msgResponse.msgNamaToko!!.list[0])
+                                msgResponse.msg == "nama_pemilik" -> view.onResult(msgResponse.msgNamaPemilik!!.list[0])
+                                msgResponse.msg == "alamat" -> view.onResult(msgResponse.msgAlamat!!.list[0])
+                                msgResponse.msg == "latitude" -> view.onResult(msgResponse.msgLatitude!!.list[0])
+                                msgResponse.msg == "longitude" -> view.onResult(msgResponse.msgLongitude!!.list[0])
+                                msgResponse.msg == "gambar_toko" -> view.onResult(msgResponse.msgGambarToko!!.list[0])
+                            }
                         }
-                        showLog("Error1: $response")
                     }
                 }
 

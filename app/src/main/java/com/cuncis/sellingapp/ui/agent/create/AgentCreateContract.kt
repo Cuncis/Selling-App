@@ -10,11 +10,12 @@ interface AgentCreateContract {
                         longitude: String, gambarToko: File)
     }
 
-    interface View {
+    interface View{
         fun initActivity()
         fun initListener()
         fun onLoading(loading: Boolean)
-        fun onResult(response: AgentUpdateResponse)
+//        fun onResult(response: AgentUpdateResponse)
+        fun onResult(response: String)
         fun showMessage(message: String)
     }
 
