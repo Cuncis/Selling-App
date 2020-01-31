@@ -1,5 +1,6 @@
 package com.cuncis.sellingapp.ui.agent.update
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,6 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
-import com.cuncis.sellingapp.data.model.AgentUpdateResponse
 import com.cuncis.sellingapp.ui.agent.AgentMapsActivity
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.FileUtils
@@ -17,6 +17,8 @@ import com.cuncis.sellingapp.util.Utils
 import com.lazday.poslaravel.util.GalleryHelper
 import kotlinx.android.synthetic.main.activity_agent_create.*
 import  com.cuncis.sellingapp.util.Utils.Companion.setGlideImage
+import com.cuncis.sellingapp.util.Utils.Companion.showLog
+import com.cuncis.sellingapp.x.AgentUpdateResponse
 
 class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
 
@@ -30,6 +32,14 @@ class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
         setContentView(R.layout.activity_agent_create)
         presenter = AgentUpdatePresenter(this)
         presenter.getDetail(Constants.AGENT_ID)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == pickImage && resultCode == Activity.RESULT_OK) {
+            uriImage = data!!.data
+            imvImage.setImageURI(uriImage)
+        }
     }
 
     override fun onStart() {
@@ -68,12 +78,14 @@ class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
             val location = edtLocation.text
 
             if (nameStore.isNullOrEmpty() || nameOwner.isNullOrEmpty() || address.isNullOrEmpty()
-                || location.isNullOrEmpty() || uriImage == null) {
+                || location.isNullOrEmpty()) {
                 showMessage("Lengkapi data dengan benar")
             } else {
                 presenter.updateAgent(Constants.AGENT_ID, nameStore.toString(), nameOwner.toString(), address.toString(),
                     Constants.LATITUDE, Constants.LONGITUDE, FileUtils.getFile(this, uriImage))
             }
+
+            showLog("Name: $nameStore, Owner: $nameStore, Address: $address, Location: $location, Url: $uriImage")
         }
     }
 
@@ -105,7 +117,7 @@ class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
     }
 
     override fun onResultUpdate(responseUpdate: AgentUpdateResponse) {
-        showMessage(responseUpdate.msg!!)
+        showMessage("aa  " + responseUpdate.msg?.sukses?.get(0))
         finish()
     }
 
@@ -113,4 +125,8 @@ class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
 }

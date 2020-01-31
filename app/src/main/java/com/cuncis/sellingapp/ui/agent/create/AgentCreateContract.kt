@@ -1,6 +1,5 @@
 package com.cuncis.sellingapp.ui.agent.create
 
-import com.cuncis.sellingapp.data.model.AgentUpdateResponse
 import java.io.File
 
 interface AgentCreateContract {

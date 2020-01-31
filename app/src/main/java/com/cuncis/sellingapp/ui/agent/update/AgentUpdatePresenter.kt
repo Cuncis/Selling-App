@@ -2,8 +2,9 @@ package com.cuncis.sellingapp.ui.agent.update
 
 import android.widget.Toast
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
-import com.cuncis.sellingapp.data.model.AgentUpdateResponse
 import com.cuncis.sellingapp.network.ApiService
+import com.cuncis.sellingapp.util.Utils
+import com.cuncis.sellingapp.x.AgentUpdateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -63,11 +64,11 @@ class AgentUpdatePresenter (val view: AgentUpdateContract.View): AgentUpdateCont
         }
 
         view.onLoading(true)
-        ApiService.theSellingApi.updateAgent(kodeAgen, namaToko, namaPemilik, alamat, latitude, longitude, multipartBody, "PUT")
+        ApiService.theSellingApi.updateAgent(kodeAgen, namaToko, namaPemilik, alamat, latitude, longitude, multipartBody, "PATCH")
             .enqueue(object : Callback<AgentUpdateResponse> {
                 override fun onFailure(call: Call<AgentUpdateResponse>, t: Throwable) {
                     view.onLoading(false)
-                    view.showMessage("" + t.message)
+                    view.showMessage("bb   " + t.localizedMessage)
                 }
 
                 override fun onResponse(
@@ -77,6 +78,7 @@ class AgentUpdatePresenter (val view: AgentUpdateContract.View): AgentUpdateCont
                     view.onLoading(false)
                     if (response.isSuccessful) {
                         view.onResultUpdate(response.body()!!)
+                        Utils.showLog("Sukses: " + response.body())
                     }
                 }
 

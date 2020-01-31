@@ -1,10 +1,10 @@
 package com.cuncis.sellingapp.ui.agent.create
 
 import android.widget.Toast
-import com.cuncis.sellingapp.data.model.AgentUpdateResponse
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.ui.agent.AgentContract
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
+import com.cuncis.sellingapp.x.AgentUpdateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -49,18 +49,20 @@ class AgentCreatePresenter(val view: AgentCreateContract.View): AgentCreateContr
                     val msgResponse = response.body()
                     if (response.isSuccessful) {
 //                        view.onResult(msgResponse!!.msgSukses!!.list[0])
-                        view.onResult("SUKSeS")
+                        view.onResult("SUKSES")
+                        showLog("Sukses: " + response.body())
                     } else {
-                        if (!response.body()!!.status!!) {
-                            when {
-                                msgResponse!!.msg == "nama_toko" -> view.onResult(msgResponse.msgNamaToko!!.list[0])
-                                msgResponse.msg == "nama_pemilik" -> view.onResult(msgResponse.msgNamaPemilik!!.list[0])
-                                msgResponse.msg == "alamat" -> view.onResult(msgResponse.msgAlamat!!.list[0])
-                                msgResponse.msg == "latitude" -> view.onResult(msgResponse.msgLatitude!!.list[0])
-                                msgResponse.msg == "longitude" -> view.onResult(msgResponse.msgLongitude!!.list[0])
-                                msgResponse.msg == "gambar_toko" -> view.onResult(msgResponse.msgGambarToko!!.list[0])
-                            }
-                        }
+                        showLog("" + response.body())
+//                        if (!response.body()!!.status!!) {
+//                            when {
+//                                msgResponse!!.msg == "nama_toko" -> view.onResult(msgResponse.msgNamaToko!!.list[0])
+//                                msgResponse.msg == "nama_pemilik" -> view.onResult(msgResponse.msgNamaPemilik!!.list[0])
+//                                msgResponse.msg == "alamat" -> view.onResult(msgResponse.msgAlamat!!.list[0])
+//                                msgResponse.msg == "latitude" -> view.onResult(msgResponse.msgLatitude!!.list[0])
+//                                msgResponse.msg == "longitude" -> view.onResult(msgResponse.msgLongitude!!.list[0])
+//                                msgResponse.msg == "gambar_toko" -> view.onResult(msgResponse.msgGambarToko!!.list[0])
+//                            }
+//                        }
                     }
                 }
 

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.cuncis.sellingapp.R
-import com.cuncis.sellingapp.data.model.AgentUpdateResponse
 import com.cuncis.sellingapp.ui.agent.AgentMapsActivity
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.FileUtils
