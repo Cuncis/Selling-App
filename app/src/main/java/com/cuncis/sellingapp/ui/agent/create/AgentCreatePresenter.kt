@@ -1,10 +1,8 @@
 package com.cuncis.sellingapp.ui.agent.create
 
-import android.widget.Toast
 import com.cuncis.sellingapp.network.ApiService
-import com.cuncis.sellingapp.ui.agent.AgentContract
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
-import com.cuncis.sellingapp.x.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.AgentCreateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -34,33 +32,54 @@ class AgentCreatePresenter(val view: AgentCreateContract.View): AgentCreateContr
 
         view.onLoading(true)
         ApiService.theSellingApi.insertAgent(namaToko, namaPemilik, alamat, latitude, longitude, multiparBody!!)
-            .enqueue(object : Callback<AgentUpdateResponse> {
-                override fun onFailure(call: Call<AgentUpdateResponse>, t: Throwable) {
+            .enqueue(object : Callback<AgentCreateResponse> {
+                override fun onFailure(call: Call<AgentCreateResponse>, t: Throwable) {
                     view.onLoading(false)
                     showLog("Error: " + t.message)
                     view.showMessage("" + t.message)
                 }
 
                 override fun onResponse(
-                    call: Call<AgentUpdateResponse>,
-                    response: Response<AgentUpdateResponse>
+                    call: Call<AgentCreateResponse>,
+                    response: Response<AgentCreateResponse>
                 ) {
                     view.onLoading(false)
                     val msgResponse = response.body()
                     if (response.isSuccessful) {
-//                        view.onResult(msgResponse!!.msgSukses!!.list[0])
-                        view.onResult("SUKSES")
-                        showLog("Sukses: " + response.body())
+                        view.onResult("" + response.body()?.msg?.sukses?.get(0))
+                        showLog("Sukses1: " + response.body()?.msg?.sukses?.get(0))
+                        var str = ""
+                        when {
+                            msgResponse?.msg?.namaToko != null -> {
+                                str = "Nama Toko"
+                            }
+                            msgResponse?.msg?.namaPemilik != null -> {
+                                str = "Nama Pemilik"
+                            }
+                            msgResponse?.msg?.alamat != null -> {
+                                str = "Alamat"
+                            }
+                            msgResponse?.msg?.latitude != null -> {
+                                str = "latitude"
+                            }
+                            msgResponse?.msg?.longitude != null -> {
+                                str = "Longitude"
+                            }
+                            msgResponse?.msg?.gambarToko != null -> {
+                                str = "Gambar Toko"
+                            }
+                            msgResponse?.msg?.sukses != null -> {
+                                str = "Sukses"
+                            }
+                        }
+                        showLog("Sukses2: $str")
                     } else {
                         showLog("" + response.body())
 //                        if (!response.body()!!.status!!) {
-//                            when {
-//                                msgResponse!!.msg == "nama_toko" -> view.onResult(msgResponse.msgNamaToko!!.list[0])
-//                                msgResponse.msg == "nama_pemilik" -> view.onResult(msgResponse.msgNamaPemilik!!.list[0])
-//                                msgResponse.msg == "alamat" -> view.onResult(msgResponse.msgAlamat!!.list[0])
-//                                msgResponse.msg == "latitude" -> view.onResult(msgResponse.msgLatitude!!.list[0])
-//                                msgResponse.msg == "longitude" -> view.onResult(msgResponse.msgLongitude!!.list[0])
-//                                msgResponse.msg == "gambar_toko" -> view.onResult(msgResponse.msgGambarToko!!.list[0])
+//                            if (msgResponse?.msg?.namaToko.toString() == )
+//                            when (msgResponse?.msg) {
+//
+//                                msgResponse.msg.namaToko -> view.onResult(msgResponse.msgNamaToko!!.list[0])
 //                            }
 //                        }
                     }

@@ -1,13 +1,13 @@
-package com.cuncis.sellingapp.x
+package com.cuncis.sellingapp.data.model
 
 
 import com.google.gson.annotations.SerializedName
 
 
-data class AgentUpdateResponse(
+data class AgentCreateResponse(
 
 	@field:SerializedName("msg")
-	val msg: Msg? = null,
+	val msg: CreateMsg? = null,
 
 	@field:SerializedName("status")
 	val status: Boolean? = null

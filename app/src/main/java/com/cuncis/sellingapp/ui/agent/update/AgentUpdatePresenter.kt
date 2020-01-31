@@ -1,10 +1,9 @@
 package com.cuncis.sellingapp.ui.agent.update
 
-import android.widget.Toast
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.util.Utils
-import com.cuncis.sellingapp.x.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.AgentCreateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -65,23 +64,19 @@ class AgentUpdatePresenter (val view: AgentUpdateContract.View): AgentUpdateCont
 
         view.onLoading(true)
         ApiService.theSellingApi.updateAgent(kodeAgen, namaToko, namaPemilik, alamat, latitude, longitude, multipartBody, "PATCH")
-            .enqueue(object : Callback<AgentUpdateResponse> {
-                override fun onFailure(call: Call<AgentUpdateResponse>, t: Throwable) {
-                    view.onLoading(false)
-                    view.showMessage("bb   " + t.localizedMessage)
-                }
-
-                override fun onResponse(
-                    call: Call<AgentUpdateResponse>,
-                    response: Response<AgentUpdateResponse>
-                ) {
+            .enqueue(object : Callback<AgentCreateResponse> {
+                override fun onResponse(call: Call<AgentCreateResponse>, response: Response<AgentCreateResponse>) {
                     view.onLoading(false)
                     if (response.isSuccessful) {
                         view.onResultUpdate(response.body()!!)
                         Utils.showLog("Sukses: " + response.body())
                     }
                 }
-
+                override fun onFailure(call: Call<AgentCreateResponse>, t: Throwable) {
+                    view.onLoading(false)
+                    Utils.showLog("Error: " + t.localizedMessage)
+                    view.showMessage("bb   " + t.message)
+                }
             })
     }
 }

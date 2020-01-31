@@ -1,7 +1,7 @@
 package com.cuncis.sellingapp.ui.agent.update
 
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
-import com.cuncis.sellingapp.x.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.AgentCreateResponse
 import java.io.File
 
 interface AgentUpdateContract {
@@ -17,7 +17,7 @@ interface AgentUpdateContract {
         fun initListener()
         fun onLoading(loading: Boolean)
         fun onResultDetail(responseDetail: AgentDetailResponse)
-        fun onResultUpdate(responseUpdate: AgentUpdateResponse)
+        fun onResultUpdate(responseUpdate: AgentCreateResponse)
         fun showMessage(message: String)
     }
 

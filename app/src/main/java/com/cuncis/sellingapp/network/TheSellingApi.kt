@@ -3,7 +3,7 @@ package com.cuncis.sellingapp.network
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
 import com.cuncis.sellingapp.data.model.AgentResponse
 import com.cuncis.sellingapp.data.model.PegawaiResponse
-import com.cuncis.sellingapp.x.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.AgentCreateResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -30,7 +30,7 @@ interface TheSellingApi {
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
         @Part gambarToko: MultipartBody.Part
-    ): Call<AgentUpdateResponse>
+    ): Call<AgentCreateResponse>
 
     @GET("agen/{kd_agen}")
     fun getAgentDetail(
@@ -48,7 +48,7 @@ interface TheSellingApi {
         @Query("longitude") longitude: String,
         @Part gambarToko: MultipartBody.Part,
         @Query("_method") _method: String
-    ): Call<AgentUpdateResponse>
+    ): Call<AgentCreateResponse>
 }
 
 

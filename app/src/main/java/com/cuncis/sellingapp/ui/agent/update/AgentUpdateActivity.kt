@@ -7,18 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.model.AgentDetailResponse
 import com.cuncis.sellingapp.ui.agent.AgentMapsActivity
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.FileUtils
-import com.cuncis.sellingapp.util.Utils
 import com.lazday.poslaravel.util.GalleryHelper
 import kotlinx.android.synthetic.main.activity_agent_create.*
 import  com.cuncis.sellingapp.util.Utils.Companion.setGlideImage
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
-import com.cuncis.sellingapp.x.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.AgentCreateResponse
 
 class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
 
@@ -116,7 +114,7 @@ class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
         this.setGlideImage(imvImage, agent.gambarToko!!, progress)
     }
 
-    override fun onResultUpdate(responseUpdate: AgentUpdateResponse) {
+    override fun onResultUpdate(responseUpdate: AgentCreateResponse) {
         showMessage("aa  " + responseUpdate.msg?.sukses?.get(0))
         finish()
     }
