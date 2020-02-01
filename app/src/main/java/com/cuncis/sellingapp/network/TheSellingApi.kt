@@ -1,9 +1,10 @@
 package com.cuncis.sellingapp.network
 
-import com.cuncis.sellingapp.data.model.AgentDetailResponse
-import com.cuncis.sellingapp.data.model.AgentResponse
+import com.cuncis.sellingapp.data.model.agent.AgentDetailResponse
+import com.cuncis.sellingapp.data.model.agent.AgentResponse
 import com.cuncis.sellingapp.data.model.PegawaiResponse
-import com.cuncis.sellingapp.data.model.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -49,6 +50,11 @@ interface TheSellingApi {
         @Part gambarToko: MultipartBody.Part,
         @Query("_method") _method: String
     ): Call<AgentCreateResponse>
+
+    @DELETE("agen/{kd_agen}")
+    fun deleteAgent(
+        @Path("kd_agen") kodeAgen: Long
+    ): Call<AgentUpdateResponse>
 }
 
 

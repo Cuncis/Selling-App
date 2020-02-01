@@ -1,10 +1,10 @@
-package com.cuncis.sellingapp.data.model
+package com.cuncis.sellingapp.data.model.agent
 
 
 import com.google.gson.annotations.SerializedName
 
 
-data class AgentDetail (
+data class Agent(
 
 	@field:SerializedName("nama_pemilik")
 	val namaPemilik: String? = null,

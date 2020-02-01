@@ -2,7 +2,7 @@ package com.cuncis.sellingapp.ui.agent.create
 
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
-import com.cuncis.sellingapp.data.model.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

@@ -1,9 +1,9 @@
 package com.cuncis.sellingapp.ui.agent.update
 
-import com.cuncis.sellingapp.data.model.AgentDetailResponse
+import com.cuncis.sellingapp.data.model.agent.AgentDetailResponse
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.util.Utils
-import com.cuncis.sellingapp.data.model.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

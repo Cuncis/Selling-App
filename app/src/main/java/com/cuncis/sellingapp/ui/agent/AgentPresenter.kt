@@ -1,7 +1,9 @@
 package com.cuncis.sellingapp.ui.agent
 
-import com.cuncis.sellingapp.data.model.AgentResponse
+import com.cuncis.sellingapp.data.model.agent.AgentResponse
+import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
 import com.cuncis.sellingapp.network.ApiService
+import com.cuncis.sellingapp.util.Utils.Companion.showLog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,4 +34,65 @@ class AgentPresenter(val view: AgentContract.View): AgentContract.Presenter {
                 }
             })
     }
+
+    override fun deleteAgent(kodeAgent: Long) {
+        view.onLoadingAgent(true)
+        ApiService.theSellingApi.deleteAgent(kodeAgent)
+            .enqueue(object : Callback<AgentUpdateResponse> {
+                override fun onResponse(call: Call<AgentUpdateResponse>, response: Response<AgentUpdateResponse>) {
+                    view.onLoadingAgent(false)
+                    if (response.isSuccessful) {
+                        val deleteResponse: AgentUpdateResponse? = response.body()
+                        view.onResultDelete(deleteResponse!!)
+                    } else {
+                        showLog("" + response.message())
+                    }
+                }
+                override fun onFailure(call: Call<AgentUpdateResponse>, t: Throwable) {
+                    view.onLoadingAgent(false)
+                    showLog("" + t.message)
+                }
+
+            })
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

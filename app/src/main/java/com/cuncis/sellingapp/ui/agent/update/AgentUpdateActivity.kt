@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.cuncis.sellingapp.R
-import com.cuncis.sellingapp.data.model.AgentDetailResponse
+import com.cuncis.sellingapp.data.model.agent.AgentDetailResponse
 import com.cuncis.sellingapp.ui.agent.AgentMapsActivity
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.FileUtils
@@ -16,7 +16,7 @@ import com.lazday.poslaravel.util.GalleryHelper
 import kotlinx.android.synthetic.main.activity_agent_create.*
 import  com.cuncis.sellingapp.util.Utils.Companion.setGlideImage
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
-import com.cuncis.sellingapp.data.model.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 
 class AgentUpdateActivity : AppCompatActivity(), AgentUpdateContract.View {
 

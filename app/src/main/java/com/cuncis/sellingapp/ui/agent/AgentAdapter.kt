@@ -8,7 +8,7 @@ import android.widget.PopupMenu
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import com.cuncis.sellingapp.R
-import com.cuncis.sellingapp.data.model.Agent
+import com.cuncis.sellingapp.data.model.agent.Agent
 import com.cuncis.sellingapp.util.Constants
 import com.infinityandroid.roundedimageview.RoundedImageView
 import kotlinx.android.synthetic.main.item_agent.view.*
@@ -28,6 +28,12 @@ class AgentAdapter (val context: Context, private val agentList: ArrayList<Agent
     override fun onBindViewHolder(holder: AgentHolder, position: Int) {
         holder.bind(agentList[position])
         context.setGlideImage(holder.imgStore, agentList[position].gambarToko!!, holder.progress)
+
+        holder.itemView.relative_layout.setOnClickListener {
+            Constants.AGENT_ID = agentList[position].kdAgen!!.toLong()
+            clickListener(agentList[position], position, "detail")
+        }
+
         holder.itemView.imgOptions.setOnClickListener {
             val popupMenu = PopupMenu(context, holder.itemView.imgOptions)
             popupMenu.inflate(R.menu.menu_options)
@@ -52,6 +58,12 @@ class AgentAdapter (val context: Context, private val agentList: ArrayList<Agent
         agentList.clear()
         agentList.addAll(newAgentList)
         notifyDataSetChanged()
+    }
+
+    fun removeAgent(position: Int) {
+        agentList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, agentList.size)
     }
 
     inner class AgentHolder(view: View): RecyclerView.ViewHolder(view) {

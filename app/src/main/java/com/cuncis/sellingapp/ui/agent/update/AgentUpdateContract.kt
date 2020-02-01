@@ -1,7 +1,7 @@
 package com.cuncis.sellingapp.ui.agent.update
 
-import com.cuncis.sellingapp.data.model.AgentDetailResponse
-import com.cuncis.sellingapp.data.model.AgentCreateResponse
+import com.cuncis.sellingapp.data.model.agent.AgentDetailResponse
+import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import java.io.File
 
 interface AgentUpdateContract {
