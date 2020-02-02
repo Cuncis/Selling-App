@@ -13,6 +13,7 @@ import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.database.PrefsManager
 import com.cuncis.sellingapp.data.model.transaction.Transaksi
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
+import com.cuncis.sellingapp.ui.transaction.detail.TransactionDetailFragment
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
 import kotlinx.android.synthetic.main.fragment_transaction.*
@@ -88,7 +89,8 @@ class TransactionFragment : Fragment(), TransactionContract.View {
     override fun onClickTransaction(invoice: String) {
         Constants.INVOICE = invoice
         activity!!.supportFragmentManager.beginTransaction()
-            .replace(R.id.container, TransactionDetailFragment(), "tag_transDetail")
+            .replace(R.id.container,
+                TransactionDetailFragment(), "tag_transDetail")
             .commit()
         showLog("Click Detail Transaction")
     }

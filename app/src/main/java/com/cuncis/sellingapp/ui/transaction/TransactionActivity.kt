@@ -15,12 +15,18 @@ class TransactionActivity : AppCompatActivity() {
 
     private fun initActivity() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.container, TransactionFragment(), "tag_fragment")
+            .add(R.id.container, TransactionFragment(), "transFrag")
             .commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        if (supportFragmentManager.findFragmentByTag("transFrag") == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, TransactionFragment(), "transFrag")
+                .commit()
+        } else {
+            finish()
+        }
         return super.onSupportNavigateUp()
     }
 }
