@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.github.chirag-kachhadiya:RoundedImageView:1.0'
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     // Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'

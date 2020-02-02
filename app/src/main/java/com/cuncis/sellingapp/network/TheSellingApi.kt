@@ -5,6 +5,8 @@ import com.cuncis.sellingapp.data.model.agent.AgentResponse
 import com.cuncis.sellingapp.data.model.PegawaiResponse
 import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
+import com.cuncis.sellingapp.data.model.transaction.detail.DetailTransaksiResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -55,6 +57,18 @@ interface TheSellingApi {
     fun deleteAgent(
         @Path("kd_agen") kodeAgen: Long
     ): Call<AgentUpdateResponse>
+
+    @FormUrlEncoded
+    @POST("get_transaksi")
+    fun getTransactionByUsername(
+        @Field("username") username: String
+    ): Call<TransaksiResponse>
+
+    @FormUrlEncoded
+    @POST("get_detail_transaksi")
+    fun getTransactionByInvoice(
+        @Field("no_faktur") noFaktur: String
+    ): Call<DetailTransaksiResponse>
 }
 
 

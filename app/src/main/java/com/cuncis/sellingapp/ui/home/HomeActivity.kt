@@ -9,6 +9,7 @@ import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.database.PrefsManager
 import com.cuncis.sellingapp.ui.agent.AgentActivity
 import com.cuncis.sellingapp.ui.login.LoginActivity
+import com.cuncis.sellingapp.ui.transaction.TransactionActivity
 import com.cuncis.sellingapp.ui.user.UserActivity
 import com.cuncis.sellingapp.util.Utils.Companion.showToast
 import kotlinx.android.synthetic.main.activity_home.*
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     override fun initListener() {
         crvTransaction.setOnClickListener {
             if (prefsManager.prefsIsLogin) {
-//                startActivity(Intent(this, TransactionActivity::class.java))
+                startActivity(Intent(this, TransactionActivity::class.java))
             } else {
                 showMessage("Anda Belum Login")
             }

@@ -21,7 +21,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.agent.update.AgentUpdateActivity"></activity>
+        <activity android:name=".ui.transaction.TransactionActivity"></activity>
+        <activity android:name=".ui.agent.update.AgentUpdateActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
