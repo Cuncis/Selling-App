@@ -5,6 +5,7 @@ import com.cuncis.sellingapp.data.model.agent.AgentResponse
 import com.cuncis.sellingapp.data.model.PegawaiResponse
 import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
+import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
 import com.cuncis.sellingapp.data.model.transaction.detail.DetailTransaksiResponse
 import okhttp3.MultipartBody
@@ -69,6 +70,12 @@ interface TheSellingApi {
     fun getTransactionByInvoice(
         @Field("no_faktur") noFaktur: String
     ): Call<DetailTransaksiResponse>
+
+    @FormUrlEncoded
+    @POST("get_cart")
+    fun getCart(
+        @Field("username") username: String
+    ): Call<CartResponse>
 }
 
 

@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.cuncis.sellingapp.R
 
+
 class Utils {
     companion object {
         fun showLog(message: String) {

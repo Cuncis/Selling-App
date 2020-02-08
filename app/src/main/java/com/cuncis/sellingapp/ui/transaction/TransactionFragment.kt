@@ -1,6 +1,7 @@
 package com.cuncis.sellingapp.ui.transaction
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.database.PrefsManager
 import com.cuncis.sellingapp.data.model.transaction.Transaksi
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
+import com.cuncis.sellingapp.ui.cart.CartActivity
 import com.cuncis.sellingapp.ui.transaction.detail.TransactionDetailFragment
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
@@ -70,7 +72,7 @@ class TransactionFragment : Fragment(), TransactionContract.View {
         }
 
         fab.setOnClickListener {
-
+            context!!.startActivity(Intent(context, CartActivity::class.java))
         }
     }
 
