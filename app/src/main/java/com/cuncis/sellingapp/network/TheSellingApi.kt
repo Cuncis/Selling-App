@@ -6,6 +6,7 @@ import com.cuncis.sellingapp.data.model.PegawaiResponse
 import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
 import com.cuncis.sellingapp.data.model.cart.CartResponse
+import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
 import com.cuncis.sellingapp.data.model.transaction.detail.DetailTransaksiResponse
 import okhttp3.MultipartBody
@@ -76,6 +77,14 @@ interface TheSellingApi {
     fun getCart(
         @Field("username") username: String
     ): Call<CartResponse>
+
+    @FormUrlEncoded
+    @POST("add_cart")
+    fun addCart(
+        @Field("username") username: String,
+        @Field("kd_produk") kdProduk: Long,
+        @Field("jumlah") jumlah: Long
+    ): Call<CartUpdateResponse>
 }
 
 

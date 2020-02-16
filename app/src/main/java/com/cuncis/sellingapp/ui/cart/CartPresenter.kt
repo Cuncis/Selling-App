@@ -22,8 +22,8 @@ class CartPresenter(val view: CartContract.View): CartContract.Presenter {
                     view.onLoadingCart(false)
                     if (response.isSuccessful) {
                         val cartResponse: CartResponse? = response.body()
-                        showLog("" + cartResponse?.data)
-//                        view.onResultCart(cartResponse!!)
+                        showLog("RESPONSE: " + cartResponse?.data)
+                        view.onResultCart(cartResponse!!)
                     } else {
                         showLog("" + response.message())
                     }

@@ -1,5 +1,6 @@
 package com.cuncis.sellingapp.ui.cart
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,9 +10,11 @@ import com.cuncis.sellingapp.R
 import com.cuncis.sellingapp.data.database.PrefsManager
 import com.cuncis.sellingapp.data.model.cart.Cart
 import com.cuncis.sellingapp.data.model.cart.CartResponse
+import com.cuncis.sellingapp.ui.cart.add.CartAddActivity
+import com.cuncis.sellingapp.util.Utils.Companion.showLog
 import kotlinx.android.synthetic.main.activity_cart.*
 
-class CartActivity : AppCompatActivity(), CartContract.View {
+class   CartActivity : AppCompatActivity(), CartContract.View {
 
     private lateinit var prefsManager: PrefsManager
     private lateinit var cartAdapter: CartAdapter
@@ -48,7 +51,7 @@ class CartActivity : AppCompatActivity(), CartContract.View {
         }
 
         btnAdd.setOnClickListener {
-
+            startActivity(Intent(this, CartAddActivity::class.java))
         }
 
         txvReset.setOnClickListener {
@@ -73,6 +76,7 @@ class CartActivity : AppCompatActivity(), CartContract.View {
 
     override fun onResultCart(response: CartResponse) {
         val carts: List<Cart> = response.data!!
+        showLog("" + carts)
         if (carts.isNullOrEmpty()) {
             txvReset.visibility = View.GONE
             edtAgent.visibility = View.GONE
@@ -85,6 +89,11 @@ class CartActivity : AppCompatActivity(), CartContract.View {
 
     override fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 }
 

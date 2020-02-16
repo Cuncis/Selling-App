@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 
 data class CartResponse(
 
-	@field:SerializedName("data")
+	@SerializedName("data")
 	val data: List<Cart>? = null
 )
