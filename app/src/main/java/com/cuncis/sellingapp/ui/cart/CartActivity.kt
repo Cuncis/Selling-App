@@ -65,6 +65,7 @@ class   CartActivity : AppCompatActivity(), CartContract.View {
         btnCheckout.setOnClickListener {
 
         }
+
     }
 
     override fun onLoadingCart(loading: Boolean) {
