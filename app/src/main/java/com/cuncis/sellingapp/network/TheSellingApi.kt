@@ -96,6 +96,20 @@ interface TheSellingApi {
     fun getPrductByCategory(
         @Field("kd_kategori") kdKategori: String
     ): Call<ProdukResponse>
+
+    @FormUrlEncoded
+    @POST("delete_item_cart")
+    fun deleteItemCart(
+        @Field("kd_keranjang") kdKeranjang: String
+    ): Call<CartUpdateResponse>
+
+    @FormUrlEncoded
+    @POST("delete_cart")
+    fun deleteCart(
+        @Field("username") username: String
+    ): Call<CartUpdateResponse>
+
+
 }
 
 

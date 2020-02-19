@@ -1,6 +1,7 @@
 package com.cuncis.sellingapp.ui.cart
 
 import com.cuncis.sellingapp.data.model.cart.CartResponse
+import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
 import retrofit2.Call
@@ -35,4 +36,78 @@ class CartPresenter(val view: CartContract.View): CartContract.Presenter {
                 }
             })
     }
+
+    override fun deleteItemCart(kdKeranjang: String) {
+        view.onLoadingCart(true)
+        ApiService.theSellingApi.deleteItemCart(kdKeranjang)
+            .enqueue(object : Callback<CartUpdateResponse> {
+                override fun onResponse(call: Call<CartUpdateResponse>, response: Response<CartUpdateResponse>) {
+                    view.onLoadingCart(false)
+                    if (response.isSuccessful) {
+                        val cartResponse: CartUpdateResponse? = response.body()
+                        showLog("RESPONSE: " + cartResponse?.msg)
+                        view.onResultDelete(cartResponse!!)
+                    } else {
+                        showLog("" + response.message())
+                    }
+                }
+                override fun onFailure(call: Call<CartUpdateResponse>, t: Throwable) {
+                    view.onLoadingCart(false)
+                    showLog("" + t.message)
+                    view.showMessage("" + t.message)
+                }
+            })
+    }
+
+    override fun deleteCart(username: String) {
+        view.onLoadingCart(true)
+        ApiService.theSellingApi.deleteCart(username)
+            .enqueue(object : Callback<CartUpdateResponse> {
+                override fun onResponse(call: Call<CartUpdateResponse>, response: Response<CartUpdateResponse>) {
+                    view.onLoadingCart(false)
+                    if (response.isSuccessful) {
+                        val cartResponse: CartUpdateResponse? = response.body()
+                        showLog("RESPONSE: " + cartResponse?.msg)
+                        view.onResultDelete(cartResponse!!)
+                    } else {
+                        showLog("" + response.message())
+                    }
+                }
+                override fun onFailure(call: Call<CartUpdateResponse>, t: Throwable) {
+                    view.onLoadingCart(false)
+                    showLog("" + t.message)
+                    view.showMessage("" + t.message)
+                }
+
+            })
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
