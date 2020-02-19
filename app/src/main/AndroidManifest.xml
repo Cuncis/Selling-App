@@ -21,7 +21,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.cart.add.CartAddActivity"></activity>
+        <activity android:name=".ui.product.ProductActivity"></activity>
+        <activity android:name=".ui.cart.add.CartAddActivity" />
         <activity android:name=".ui.cart.CartActivity" />
         <activity android:name=".ui.transaction.TransactionActivity" />
         <activity android:name=".ui.agent.update.AgentUpdateActivity" />

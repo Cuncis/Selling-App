@@ -7,6 +7,8 @@ import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
 import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
+import com.cuncis.sellingapp.data.model.category.KategoriResponse
+import com.cuncis.sellingapp.data.model.product.ProdukResponse
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
 import com.cuncis.sellingapp.data.model.transaction.detail.DetailTransaksiResponse
 import okhttp3.MultipartBody
@@ -85,6 +87,15 @@ interface TheSellingApi {
         @Field("kd_produk") kdProduk: Long,
         @Field("jumlah") jumlah: Long
     ): Call<CartUpdateResponse>
+
+    @GET("get_kategori")
+    fun getCategory(): Call<KategoriResponse>
+
+    @FormUrlEncoded
+    @POST("get_produk")
+    fun getPrductByCategory(
+        @Field("kd_kategori") kdKategori: String
+    ): Call<ProdukResponse>
 }
 
 
