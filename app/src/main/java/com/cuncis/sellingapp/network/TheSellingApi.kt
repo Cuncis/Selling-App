@@ -7,6 +7,7 @@ import com.cuncis.sellingapp.data.model.agent.AgentCreateResponse
 import com.cuncis.sellingapp.data.model.agent.AgentUpdateResponse
 import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
+import com.cuncis.sellingapp.data.model.cart.CheckoutResponse
 import com.cuncis.sellingapp.data.model.category.KategoriResponse
 import com.cuncis.sellingapp.data.model.product.ProdukResponse
 import com.cuncis.sellingapp.data.model.transaction.TransaksiResponse
@@ -108,6 +109,18 @@ interface TheSellingApi {
     fun deleteCart(
         @Field("username") username: String
     ): Call<CartUpdateResponse>
+
+    @GET("search_agen")
+    fun searchAgent(
+        @Query("keyword") keyword: String
+    ): Call<AgentResponse>
+
+    @FormUrlEncoded
+    @POST("checkout")
+    fun checkout(
+        @Field("username") username: String,
+        @Field("kd_agen") kdAgent: Long
+    ): Call<CheckoutResponse>
 
 
 }

@@ -12,6 +12,8 @@ import com.cuncis.sellingapp.data.database.PrefsManager
 import com.cuncis.sellingapp.data.model.cart.Cart
 import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
+import com.cuncis.sellingapp.data.model.cart.CheckoutResponse
+import com.cuncis.sellingapp.ui.agent.search.AgentSearchActivity
 import com.cuncis.sellingapp.ui.cart.add.CartAddActivity
 import com.cuncis.sellingapp.util.Constants
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
@@ -36,7 +38,13 @@ class CartActivity : AppCompatActivity(), CartContract.View {
         if (Constants.IS_CHANGED) {
             Constants.IS_CHANGED = false
             cartPresenter.getCart(prefsManager.prefsUsername)
+            edtAgent.setText(Constants.AGENT_NAME)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Constants.AGENT_NAME = ""
     }
 
     override fun initActivity() {
@@ -70,11 +78,19 @@ class CartActivity : AppCompatActivity(), CartContract.View {
         }
 
         edtAgent.setOnClickListener {
-
+            startActivity(Intent(this, AgentSearchActivity::class.java))
         }
 
         btnCheckout.setOnClickListener {
-
+            if (cartAdapter.cartList.isNullOrEmpty()) {
+                showMessage("Keranjang Kosong")
+            } else {
+                if (edtAgent.text.isNullOrEmpty()) {
+                    edtAgent.error = "Tidak Boleh Kosong"
+                } else {
+                    cartPresenter.checkout(prefsManager.prefsUsername, Constants.AGENT_ID)
+                }
+            }
         }
 
     }
@@ -120,6 +136,24 @@ class CartActivity : AppCompatActivity(), CartContract.View {
             dialog.dismiss()
         }
         builder.show()
+    }
+
+    override fun onLoadingCheckout(loading: Boolean) {
+        when (loading) {
+            true -> {
+                btnCheckout.isEnabled = false
+                btnCheckout.text = "Memuat..."
+            }
+            false -> {
+                btnCheckout.isEnabled = true
+                btnCheckout.text = "Checkout"
+            }
+        }
+    }
+
+    override fun onResultCheckout(response: CheckoutResponse) {
+        cartPresenter.getCart(prefsManager.prefsUsername)
+        cartAdapter.removeAll()
     }
 
     override fun onSupportNavigateUp(): Boolean {

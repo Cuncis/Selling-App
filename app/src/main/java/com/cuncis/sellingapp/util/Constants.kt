@@ -5,6 +5,7 @@ object Constants {
     var LONGITUDE = ""
     const val LOCATION_PERMISSION_REQUEST_CODE = 1
     var AGENT_ID: Long = 0
+    var AGENT_NAME: String = ""
     var INVOICE: String = ""
 
     var CATEGORY_ID: Long = 0

@@ -2,6 +2,7 @@ package com.cuncis.sellingapp.ui.cart
 
 import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
+import com.cuncis.sellingapp.data.model.cart.CheckoutResponse
 
 interface CartContract {
 
@@ -10,6 +11,8 @@ interface CartContract {
 
         fun deleteItemCart(kdKeranjang: String)
         fun deleteCart(username: String)
+
+        fun checkout(username: String, kdAgent: Long)
     }
 
     interface View {
@@ -21,6 +24,9 @@ interface CartContract {
 
         fun onResultDelete(response: CartUpdateResponse)
         fun showDialog()
+
+        fun onLoadingCheckout(loading: Boolean)
+        fun onResultCheckout(response: CheckoutResponse)
     }
 
 }

@@ -2,6 +2,7 @@ package com.cuncis.sellingapp.ui.cart
 
 import com.cuncis.sellingapp.data.model.cart.CartResponse
 import com.cuncis.sellingapp.data.model.cart.CartUpdateResponse
+import com.cuncis.sellingapp.data.model.cart.CheckoutResponse
 import com.cuncis.sellingapp.network.ApiService
 import com.cuncis.sellingapp.util.Utils.Companion.showLog
 import retrofit2.Call
@@ -81,6 +82,31 @@ class CartPresenter(val view: CartContract.View): CartContract.Presenter {
 
             })
     }
+
+    override fun checkout(username: String, kdAgent: Long) {
+        view.onLoadingCheckout(true)
+        ApiService.theSellingApi.checkout(username, kdAgent)
+            .enqueue(object : Callback<CheckoutResponse> {
+                override fun onResponse(call: Call<CheckoutResponse>, response: Response<CheckoutResponse>) {
+                    view.onLoadingCheckout(false)
+                    if (response.isSuccessful) {
+                        val checkoutResponse: CheckoutResponse? = response.body()
+                        view.showMessage("" + checkoutResponse?.msg)
+                        view.onResultCheckout(checkoutResponse!!)
+                    } else {
+                        showLog("" + response.message())
+                    }
+                }
+                override fun onFailure(call: Call<CheckoutResponse>, t: Throwable) {
+                    view.onLoadingCheckout(false)
+                    showLog("" + t.message)
+                    view.showMessage("" + t.message)
+                }
+
+            })
+    }
+
+
 }
 
 
